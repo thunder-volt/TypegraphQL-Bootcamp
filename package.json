@@ -28,5 +28,15 @@
   },
   "devDependencies": {
     "typescript": "^4.8.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thunder-volt/TypegraphQL-Bootcamp.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/thunder-volt/TypegraphQL-Bootcamp/issues"
+  },
+  "homepage": "https://github.com/thunder-volt/TypegraphQL-Bootcamp#readme",
+  "description": ""
 }
