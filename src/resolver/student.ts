@@ -1,4 +1,4 @@
-import { Arg, Authorized, Mutation, Query, Resolver, Ctx } from "type-graphql";
+import { Arg, Authorized, Mutation, Query, Resolver, Ctx, FieldResolver, Root } from "type-graphql";
 import Student from "../entities/student";
 import { Change, LoginInput, NewStudent } from "../inputs/student";
 import bcryptjs from "bcryptjs";
@@ -6,7 +6,7 @@ import LoginOutput from "../utils/LoginOutput";
 import jwt from "jsonwebtoken";
 import MyContext from "../utils/context";
 
-@Resolver()
+@Resolver(() => Student)
 class StudentResolver {
     @Query(() => String)
     async hello() {
@@ -69,6 +69,17 @@ class StudentResolver {
             throw new Error(`error ---> ${e}`);
         }
     }
+
+    @FieldResolver()
+    async todos(@Root() { id }: Student) {
+        const user = await Student.findOne({ where: { id: id }, relations: ["todos"] });
+        try {
+            return user?.todos;
+        } catch (e) {
+            throw new Error(`error ---> ${e}`);
+        }
+    }
+
 }
 
 export default StudentResolver;

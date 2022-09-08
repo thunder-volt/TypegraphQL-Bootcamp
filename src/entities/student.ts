@@ -1,5 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import Todo from "./todo";
 
 @Entity('Student') //We've amde a table called students
 @ObjectType('Student') //We've said that it stores obj students
@@ -19,9 +20,10 @@ class Student extends BaseEntity {
     @Column()
     password : string;
 
-    // @OneToMany((_type) => Todo, (todos) => todos.student, { nullable: true })
-    // @Field((_type) => [Todo], { nullable: true })
-    // todos: Todo[];
+
+    @OneToMany(() => Todo, todos => todos.user)
+   @Field(() => [Todo], { nullable: true })
+   todos: Todo[]
 
 
 }
